@@ -14,9 +14,7 @@ class Pet:
             
 class Dog(Pet):
     
-    breed = "Sheepdog"
-    
-    def __init__(self, dog_name, dog_type, dog_age, dog_gender, dog_breed=breed):
+    def __init__(self, dog_name, dog_type, dog_age, dog_gender, dog_breed="Sheepdog"):
         super().__init__(dog_name, dog_type, dog_age, dog_gender)
         self.__breed = dog_breed
     
@@ -26,9 +24,7 @@ class Dog(Pet):
 
 class Cat(Pet):
     
-    coat = "Black"
-    
-    def __init__(self, cat_name, cat_type, cat_age, cat_gender, cat_coat=coat):
+    def __init__(self, cat_name, cat_type, cat_age, cat_gender, cat_coat="Black"):
         super().__init__(cat_name, cat_type, cat_age, cat_gender)
         self.__coat = cat_coat
     
