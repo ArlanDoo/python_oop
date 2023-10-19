@@ -1,38 +1,37 @@
-class GameHero():
+class Mario():
     
-    def __init__(self, name, healf, x_pos, y_pos):
-        self._name = name
-        self.healf = healf if healf >= 0 and healf <=4 else 0
-        self.xpos = x_pos if x_pos >= 0 and x_pos <=1000 else 0
-        self.ypos = y_pos if y_pos >= 0 and y_pos <=100 else 0
+    def __init__(self, x=0, y=0, healf=4):
+        self.x = x
+        self.y = y
+        self.healf = healf
     
-    def healf_fail(self, power_fail):
-        if (power_fail and power_fail < self.healf):
-            self.healf -= power_fail
-        elif (power_fail and power_fail >= self.healf):
-            self.healf = 0
-            print("Game over")
+    def __check_bounds__(self, event, val):
+        if (event in ["left", "right"]):
+            return ((self.x + val) >=0 and (self.x + val) <= 100)
+        elif (event == "jump"):
+            return ((self.y + val) >=0 and (self.y + val) <= 1000)
         else:
-            self.healf -= 1
-        
-        print(self.healf)
+            return False        
     
-    def set_step(self, order_step):
-        if (self.xpos + order_step >=0 and
-            self.xpos + order_step <= 100):
-            self.xpos += order_step
-        
-        print(self.xpos)
+    def move_left(self, step):
+        if (self.__check_bounds__("left", -step)):
+            self.x -= step
+        #     print(f"X: {self.x}")
+        # print("Move left")
     
-    def get_info(self):
-        print(f"Hero name is {self._name}")
-        print(f"Current healf: {self.healf}")
-        print(f"Current level of X: {self.xpos}")
-        print(f"Current level of Y: {self.ypos}")
-
-
-# hero_Mario = GameHero("Mario", 33, 10, 100)
-# hero_Mario.get_info()
-# hero_Mario.set_step(-100)
-# hero_Mario.set_step(0)
-# hero_Mario.set_step(10)
+    def move_right(self, step):
+        if (self.__check_bounds__("right", step)):
+            self.x += step
+        #     print(f"X: {self.x}")
+        # print("Move right")
+    
+    def jump(self, hight):
+        if (self.__check_bounds__("jump", hight)):
+            self.y += hight
+        #     print(f"Y: {self.y}")
+        # print("Move jump")
+    
+player = Mario()
+player.move_right(100)
+player.jump(50)
+print(player.x, player.y) # Выведет: 100, 50
